@@ -28,6 +28,7 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+// timestamp API
 app.get('/api/timestamp/:date_string?', (req, res) => {
   var dateString = req.params.date_string;
   var date, utc, unix;
