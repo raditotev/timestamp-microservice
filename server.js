@@ -30,15 +30,14 @@ app.get("/api/hello", function (req, res) {
 
 app.get('/api/timestamp/:date_string?', (req, res) => {
   var dateString = req.params.date_string;
-  var date;
+  var date, utc, unix;
   
-  if(dateString == ""){
-    var today = new Date();
-    console.log()
-    var unix = today.getTime();
+  if(!dateString){
+    utc = new Date();
+    unix = utc.getTime();
     return res.json({
       "unix": unix,
-      "utc": today
+      "utc": utc
     });
   }
   
@@ -48,8 +47,8 @@ app.get('/api/timestamp/:date_string?', (req, res) => {
   date = new Date(dateString);
   }
   
-  var unix = date.getTime();
-  var utc = new Date(date).toUTCString();
+  unix = date.getTime();
+  utc = new Date(date).toUTCString();
   var response = {
     "unix": unix,
     "utc": utc
