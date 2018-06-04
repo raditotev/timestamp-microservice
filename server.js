@@ -32,10 +32,18 @@ app.get('/api/timestamp/:date_string?', (req, res) => {
   var dateString = req.params.date_string;
   var date;
   
-  if(/\d+/.test(dateString))
+  if(dateString == "")
+    var today = new Date();
+    res.json({
+      "unix": today.getTime(),
+      "utc": today
+    });
+  
+  if(/\d{10}/.test(dateString)){
     date = new Date(parseInt(dateString));
-    console.log(date);
+  } else {
   date = new Date(dateString);
+  }
   
   var unix = date.getTime();
   var utc = new Date(date).toUTCString();
