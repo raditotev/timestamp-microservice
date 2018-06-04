@@ -4,11 +4,15 @@
 // init project
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
 
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
 var cors = require('cors');
 app.use(cors({optionSuccessStatus: 200}));  // some legacy browsers choke on 204
+
+// Parse URL from request
+app.use(bodyParser.urlencoded({extended: false}));
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
@@ -25,7 +29,8 @@ app.get("/api/hello", function (req, res) {
 });
 
 app.get('/api/timestamp/:date_string', (req, res) => {
-  
+  var param = req.params.date_string;
+  res.json({out: param});
 });
 
 
