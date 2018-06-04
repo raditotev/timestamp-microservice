@@ -45,7 +45,7 @@ app.get('/api/timestamp/:date_string?', (req, res) => {
   if(/\d{10}/.test(dateString)){
     date = new Date(parseInt(dateString));
   } else {
-  date = new Date(dateString);
+    date = new Date(dateString);
   }
   
   unix = date.getTime();
