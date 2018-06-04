@@ -30,7 +30,13 @@ app.get("/api/hello", function (req, res) {
 
 app.get('/api/timestamp/:date_string?', (req, res) => {
   var dateString = req.params.date_string;
-  var date = new Date(dateString);
+  var date;
+  
+  if(/\d+/.test(dateString))
+    date = new Date(parseInt(dateString));
+    console.log(date);
+  date = new Date(dateString);
+  
   var unix = date.getTime();
   var utc = new Date(date).toUTCString();
   var response = {
